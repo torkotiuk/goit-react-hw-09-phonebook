@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.link {
+  text-decoration: none;
+  display: block;
+}
+
+.btn {
+  width: 100px;
+  margin-left: 10px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.form {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.form__label {
+  margin: 0 10px;
+}
+
+.Form_input {
+  margin-left: 5px;
+  // padding: 5px;
+  // outline: 1px solid rgb(138, 132, 132);
+}
+
+.filter {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title_form {
+  text-align: center;
+  margin-bottom: 10px;
+}
