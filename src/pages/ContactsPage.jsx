@@ -10,7 +10,7 @@ import { ReactComponent as AddIcon } from '../icons/add.svg';
 import oper from '../redux/phonebook/contacts-operations';
 import {
   getLoading,
-  getVisibleContacts,
+  getContactsCount,
 } from '../redux/phonebook/contacts-selectors';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from './ContactsPage.module.scss';
@@ -23,8 +23,6 @@ const ContactsPage = ({ fetchContacts, items, isLoadingContacts }) => {
   const toggleModal = () => {
     setModal(!showModal);
   };
-
-  const itemsLength = items.length;
 
   return (
     <Section>
@@ -39,7 +37,8 @@ const ContactsPage = ({ fetchContacts, items, isLoadingContacts }) => {
         </Modal>
       )}
       {isLoadingContacts && <CircularProgress />}
-      {itemsLength ? (
+      {/* {itemsLength > 0 ? ( */}
+      {items > 0 ? (
         <>
           <Filter />
           <ContactList />
@@ -56,7 +55,7 @@ const ContactsPage = ({ fetchContacts, items, isLoadingContacts }) => {
 
 const mapStateToProps = state => ({
   isLoadingContacts: getLoading(state),
-  items: getVisibleContacts(state),
+  items: getContactsCount(state),
 });
 
 const mapDispatchToProps = dispatch => ({

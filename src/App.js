@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import ContactsPage from './pages/ContactsPage';
@@ -16,41 +16,39 @@ const HomePage = lazy(() =>
   import('./pages/HomePage' /* webpackChunkName: "home-page" */),
 );
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
+const App = ({ onGetCurrentUser }) => {
+  useEffect(() => {
+    onGetCurrentUser();
+  });
 
-  render() {
-    return (
-      <Container>
-        <AppBar />
-        <Suspense fallback={<p>Loading...</p>}>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <PublicRoute
-              path="/register"
-              restricted
-              redirectTo={'/contacts'}
-              component={RegisterPage}
-            />
-            <PublicRoute
-              path="/login"
-              restricted
-              redirectTo={'/contacts'}
-              component={LoginPage}
-            />
-            <PrivateRoute
-              path="/contacts"
-              component={ContactsPage}
-              redirectTo="/login"
-            />
-          </Switch>
-        </Suspense>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <AppBar />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <PublicRoute
+            path="/register"
+            restricted
+            redirectTo={'/contacts'}
+            component={RegisterPage}
+          />
+          <PublicRoute
+            path="/login"
+            restricted
+            redirectTo={'/contacts'}
+            component={LoginPage}
+          />
+          <PrivateRoute
+            path="/contacts"
+            component={ContactsPage}
+            redirectTo="/login"
+          />
+        </Switch>
+      </Suspense>
+    </Container>
+  );
+};
 
 const mapDispatchToProps = {
   onGetCurrentUser: authOps.getCurrentUser,
