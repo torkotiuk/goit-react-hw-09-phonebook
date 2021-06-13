@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState} from 'react';
 // import shortid from 'shortid';
 import './ContactForm.module.scss';
 import Button from '@material-ui/core/Button';
@@ -22,8 +22,7 @@ const ContactForm = ({ getData, onCloseModal }) => {
       return;
     }
 
-    // getData(state);
-    getData(name, number);
+    getData({ name: `${name}`, number: `${number}` });
     onCloseModal();
     reset();
   };
@@ -31,6 +30,13 @@ const ContactForm = ({ getData, onCloseModal }) => {
   const reset = () => {
     setName('');
     setNumber('');
+  };
+
+  const handleChangeName = event => {
+    setName(event.target.value);
+  };
+  const handleChangeNumber = event => {
+    setNumber(event.target.value);
   };
 
   return (
@@ -42,7 +48,7 @@ const ContactForm = ({ getData, onCloseModal }) => {
         type="text"
         name="name"
         value={name}
-        onChange={this.handleChange}
+        onChange={handleChangeName}
       />
       <TextField
         id="outlined-basic"
@@ -52,7 +58,7 @@ const ContactForm = ({ getData, onCloseModal }) => {
         name="number"
         required
         value={number}
-        onChange={this.handleChange}
+        onChange={handleChangeNumber}
       />
       <div className={styles.btnAdd}>
         <Button variant="contained" className="btn" type="submit">

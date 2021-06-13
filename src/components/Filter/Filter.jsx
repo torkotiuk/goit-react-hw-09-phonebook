@@ -12,6 +12,7 @@ const Filter = ({ valueState, filterByName }) => {
   );
 };
 
+
 const mapStateToProps = state => ({
   valueState: getFilter(state),
 });

@@ -28,6 +28,7 @@ const fetchContacts = () => async dispatch => {
 };
 
 const addContact = values => dispatch => {
+  // console.log(values);
   const contact = {
     name: values.name,
     number: values.number,

@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import authOper from '../redux/auth/auth-operations';
 
@@ -44,7 +44,6 @@ const LoginPage = ({ onLogin }) => {
             type="email"
             name="email"
             value={email}
-            // onChange={updateEmail}
             onChange={evt => setEmail(evt.target.value)}
           />
         </div>
@@ -76,73 +75,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(LoginPage);
-
-// class LoginPage extends Component {
-//   state = {
-//     email: '',
-//     password: '',
-//   };
-
-//   handleChange = ({ target: { name, value } }) => {
-//     this.setState({ [name]: value });
-//   };
-
-//   handleSubmit = e => {
-//     e.preventDefault();
-
-//     console.log(this.state);
-//     this.props.onLogin(this.state);
-
-//     this.setState({ name: '', email: '', password: '' });
-//   };
-
-//   render() {
-//     const { email, password } = this.state;
-
-//     return (
-//       <div className={scss.Container}>
-//         <h1 className={scss.Title}>Log in page</h1>
-
-//         <form
-//           onSubmit={this.handleSubmit}
-//           className={scss.form}
-//           autoComplete="off"
-//         >
-//           <div className={scss.Items}>
-//             <TextField
-//               className={scss.Items}
-//               id="outlined-basic"
-//               fullWidth
-//               label="Email"
-//               variant="outlined"
-//               type="email"
-//               name="email"
-//               value={email}
-//               onChange={this.handleChange}
-//             />
-//           </div>
-//           <div className={scss.Items}>
-//             <TextField
-//               id="outlined-basic"
-//               fullWidth
-//               label="Password"
-//               variant="outlined"
-//               type="password"
-//               name="password"
-//               value={password}
-//               onChange={this.handleChange}
-//             />
-//           </div>
-
-//           <div className={scss.Btn}>
-//             <Button type="submit" variant="contained" size="big">
-//               Log in
-//             </Button>
-//           </div>
-//         </form>
-//       </div>
-//     );
-//   }
-// }
-
-// export default connect(null, mapDispatchToProps)(LoginPage);
