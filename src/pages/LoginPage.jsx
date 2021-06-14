@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import authOper from '../redux/auth/auth-operations';
 
 //styles
@@ -7,23 +7,15 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import scss from './RegisterPage.module.scss';
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // v-1. we could change handleChange by next fn-s
-  // const updateEmail = evt => {
-  //   setEmail(evt.target.value);
-  // };
-  // const updatePassword = evt => {
-  //   setPassword(evt.target.value);
-  // };
-  // v-2. Via inline callback
-
+  const dispatch = useDispatch();
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    onLogin({ email: `${email}`, password: `${password}` });
+    dispatch(authOper.logIn({ email: `${email}`, password: `${password}` }));
 
     setEmail('');
     setPassword('');
@@ -37,7 +29,6 @@ const LoginPage = ({ onLogin }) => {
         <div className={scss.Items}>
           <TextField
             className={scss.Items}
-            id="outlined-basic"
             fullWidth
             label="Email"
             variant="outlined"
@@ -49,7 +40,6 @@ const LoginPage = ({ onLogin }) => {
         </div>
         <div className={scss.Items}>
           <TextField
-            id="outlined-basic"
             fullWidth
             label="Password"
             variant="outlined"
@@ -70,8 +60,4 @@ const LoginPage = ({ onLogin }) => {
   );
 };
 
-const mapDispatchToProps = {
-  onLogin: authOper.logIn,
-};
-
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default LoginPage;

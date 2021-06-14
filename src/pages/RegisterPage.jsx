@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import authOper from '../redux/auth/auth-operations';
 
 //styles
@@ -7,16 +7,21 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import scss from './RegisterPage.module.scss';
 
-const RegisterPage = ({ onRegister }) => {
+const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
   const handleSubmit = evt => {
     evt.preventDefault();
-
-    onRegister({ name: `${name}`, email: `${email}`, password: `${password}` });
-
+    dispatch(
+      authOper.register({
+        name: `${name}`,
+        email: `${email}`,
+        password: `${password}`,
+      }),
+    );
     setName('');
     setEmail('');
     setPassword('');
@@ -30,7 +35,6 @@ const RegisterPage = ({ onRegister }) => {
         <div className={scss.Items}>
           <TextField
             className={scss.Items}
-            id="outlined-basic"
             fullWidth
             label="Name"
             variant="outlined"
@@ -44,7 +48,6 @@ const RegisterPage = ({ onRegister }) => {
         <div className={scss.Items}>
           <TextField
             className={scss.Items}
-            id="outlined-basic"
             fullWidth
             label="Email"
             variant="outlined"
@@ -57,7 +60,6 @@ const RegisterPage = ({ onRegister }) => {
 
         <div className={scss.Items}>
           <TextField
-            id="outlined-basic"
             fullWidth
             label="Password"
             variant="outlined"
@@ -78,8 +80,4 @@ const RegisterPage = ({ onRegister }) => {
   );
 };
 
-const mapDispatchToProps = {
-  onRegister: authOper.register,
-};
-
-export default connect(null, mapDispatchToProps)(RegisterPage);
+export default RegisterPage;

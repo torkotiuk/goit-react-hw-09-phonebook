@@ -1,2 +1,0 @@
-(this["webpackJsonpgoit-react-hw-08-phonebook"]=this["webpackJsonpgoit-react-hw-08-phonebook"]||[]).push([[0],{204:function(e,t,o){e.exports={Title:"HomePage_Title__3tRTT"}},205:function(e,t,o){"use strict";o.r(t);o(0);var c=o(204),i=o.n(c),n=o(2);t.default=function(){return Object(n.jsx)("div",{className:i.a.Title,children:"Welcome to the contacts service \ud83d\udc68\u200d\ud83d\udc68\u200d\ud83d\udc66\u200d\ud83d\udc66"})}}}]);
-//# sourceMappingURL=home-page.67bdc629.chunk.js.map

@@ -14,11 +14,16 @@ import {
 } from '../redux/phonebook/contacts-selectors';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from './ContactsPage.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
 
-const ContactsPage = ({ fetchContacts, items, isLoadingContacts }) => {
+const ContactsPage = () => {
   const [showModal, setModal] = useState(false);
 
-  useEffect(() => fetchContacts(), [fetchContacts]);
+  const contactsCount = useSelector(getContactsCount);
+  const contactsIsLoading = useSelector(getLoading);
+
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(oper.fetchContacts()), [dispatch]);
 
   const toggleModal = () => {
     setModal(!showModal);
@@ -36,9 +41,8 @@ const ContactsPage = ({ fetchContacts, items, isLoadingContacts }) => {
           <ContactForm onCloseModal={toggleModal} />
         </Modal>
       )}
-      {isLoadingContacts && <CircularProgress />}
-      {/* {itemsLength > 0 ? ( */}
-      {items > 0 ? (
+      {contactsIsLoading && <CircularProgress />}
+      {contactsCount > 0 ? (
         <>
           <Filter />
           <ContactList />
@@ -53,13 +57,4 @@ const ContactsPage = ({ fetchContacts, items, isLoadingContacts }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isLoadingContacts: getLoading(state),
-  items: getContactsCount(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(oper.fetchContacts()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactsPage);
+export default ContactsPage;

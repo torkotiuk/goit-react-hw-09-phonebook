@@ -8,7 +8,7 @@ import LoginPage from './pages/LoginPage';
 import Container from './components/share/Container';
 import AppBar from './components/AppBar';
 import authOps from './redux/auth/auth-operations';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 
@@ -16,9 +16,10 @@ const HomePage = lazy(() =>
   import('./pages/HomePage' /* webpackChunkName: "home-page" */),
 );
 
-const App = ({ onGetCurrentUser }) => {
+const App = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    onGetCurrentUser();
+    dispatch(authOps.getCurrentUser);
   });
 
   return (
@@ -50,8 +51,4 @@ const App = ({ onGetCurrentUser }) => {
   );
 };
 
-const mapDispatchToProps = {
-  onGetCurrentUser: authOps.getCurrentUser,
-};
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;
